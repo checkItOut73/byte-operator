@@ -1,0 +1,16 @@
+{
+  "include": ["./src/server/**/*"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "outDir": "./dist/server",
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@browser/*": ["src/browser/*"],
+      "@server/*": ["src/server/*"],
+      "@configs/*": ["build/configs/*"]
+    }
+  }
+}
