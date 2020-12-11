@@ -5,7 +5,7 @@ const TSCONFIG_PATH = path.resolve(process.cwd(), 'tsconfig.json');
 const { compilerOptions } = require(TSCONFIG_PATH);
 
 module.exports = {
-    entry: ['./src/browser/index.ts'],
+    entry: ['./build/polyfills/array.forEach.async.js', './src/browser/index.ts'],
     output: {
         path: path.resolve(process.cwd(), 'dist/browser'),
         filename: 'bundle.js'
@@ -26,6 +26,10 @@ module.exports = {
                         configFile: TSCONFIG_PATH
                     }
                 }
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     },

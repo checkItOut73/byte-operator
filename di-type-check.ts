@@ -1,3 +1,5 @@
+import { UnionTypeAnnotation } from '@babel/types';
+
 class NewRelic {
     public c = 'Y';
     constructor(nr: number, test: Test) {
@@ -43,6 +45,27 @@ checkConfig({
     }
 });
 
+serviceConfig({
+    a: {
+        class: NewRelic,
+        arguments: ['']
+    },
+    c: {
+        arguments: []
+    }
+});
+
+function serviceConfig<
+    CFG extends { [key: string]: {
+        class: Class,
+        arguments: [UnionTypeAnnotation[K in keyof CFG]: CFG[K]['class']]  }
+>(cfg: CFG) {}
+
+type ServiceConfig<C extends Class> = {
+    class: C;
+    arguments: ConstructorParameters<C>;
+};
+
 type ReplaceType<A, RT, RTN> = {
     [T in keyof A]: A[T] extends RT ? RTN | A[T] : A[T];
 };
@@ -68,3 +91,15 @@ function checkConfig<
     CP1 extends ['string'],
     CP2 extends ['string']
 >(config: { serviceName1: ConfigType<T['serviceName1']>; serviceName2: ConfigType<T['serviceName2']> }) {}
+
+const conf: Conf<this> = {
+    class: NewRelic,
+    arguments: [123, new Test(123), '']
+};
+
+type Conf<C> = C extends { class: new (args: infer P) => any }
+    ? {
+          class: new (args: P) => any;
+          arguments: P;
+      }
+    : never;

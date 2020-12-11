@@ -22,5 +22,6 @@ module.exports = {
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
     collectCoverage: true,
-    coverageDirectory: TESTS_DIRECTORY + '/' + COVERAGE_REPORT_DIRECTORY
+    coverageDirectory: TESTS_DIRECTORY + '/' + COVERAGE_REPORT_DIRECTORY,
+    setupFiles: ['./build/polyfills/array.forEach.async']
 };

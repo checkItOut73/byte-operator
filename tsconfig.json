@@ -4,12 +4,15 @@
   "compilerOptions": {
     "outDir": "./dist/server",
     "esModuleInterop": true,
-    "types": ["node", "jest"],
+    "types": ["node", "jest", "./build/polyfills/array.forEach.async", "./tests/__types__"],
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
       "@browser/*": ["src/browser/*"],
+      "@components/*": ["src/browser/components/*"],
       "@server/*": ["src/server/*"],
+      "@framework/*": ["src/framework/*"],
+      "@utils/*": ["src/utils/*"],
       "@configs/*": ["build/configs/*"]
     }
   }
